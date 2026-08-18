@@ -1,12 +1,15 @@
 package com.educandoweb.course.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -41,6 +44,9 @@ public class User implements Serializable {
 	private String email;
 	private String phone;
 	private String password;
+	
+	@OneToMany(mappedBy = "client")					// Especifica o tipo de relacionamento 1 para muitos, um cliente tem muitos pedidos e um pedido só tem um cliente
+	private List<Order> orders = new ArrayList<>();	// Um usuário contém vários pedidos
 	
 	// Ao utilizar o framework spring é obrigatório colocar
 	// o construtor padrão
@@ -114,7 +120,11 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
+	// Get da lista de pedidos
+	public List<Order> getOrders() {
+		return orders;
+	}
 	
 	
 }
