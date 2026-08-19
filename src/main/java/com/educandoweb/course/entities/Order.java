@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.educandoweb.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
@@ -27,11 +28,10 @@ public class Order implements Serializable {
 	private Long id;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-	private Instant moment;
-	/*
-	  Antes da versão 8 do java usava-se o Date, mas
-	  o Instant é mais preciso.
-	*/
+	private Instant moment;				//  Antes da versão 8 do java usava-se o Date, mas o Instant é mais preciso.
+	
+	
+	private Integer orderStatus;
 	
 	@ManyToOne							// Essa anotação do JPA diz que um cliente pode ter vários pedidos, mas que o pedido só pode ter 1 cliente
 	@JoinColumn(name = "client_id")		// Essa anotação do JPA diz serve para acessar os pedidos e unir a tebela clients pois cada pedido depende de um cliente 
@@ -39,10 +39,11 @@ public class Order implements Serializable {
 	
 	// Construtores
 	public Order() {}
-	public Order(Long id, Instant moment, User client) {
+	public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
 		
 		this.id = id;
 		this.moment = moment;
+		setOrderStatus(orderStatus);
 		this.client = client;
 		
 	}
@@ -65,7 +66,7 @@ public class Order implements Serializable {
 	
 	
 	// Getters & Setters
-	public Long getid() {
+	public Long getId() {
 		return id;
 	}
 
@@ -80,15 +81,20 @@ public class Order implements Serializable {
 	public void setMoment(Instant moment) {
 		this.moment = moment;
 	}
+	
+	public OrderStatus getOrderStatus() {
+		return OrderStatus.valueOf(orderStatus);
+	}
+	public void setOrderStatus(OrderStatus orderStatus) {
+		if (orderStatus != null) {
+			this.orderStatus = orderStatus.getCode();
+		}
+	}
+	
 	public User getClient() {
 		return client;
 	}
 	public void setClient(User client) {
 		this.client = client;
-	}
-	public Long getId() {
-		return id;
-	}
-	
-	
+	}	
 }
