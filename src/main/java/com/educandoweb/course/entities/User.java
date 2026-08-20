@@ -14,8 +14,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "tb_user")
+@Entity										// Diz ao Spring que essa classe representa uma entidade
+@Table(name = "tb_user")					// Determina o nome da tabela dentro do banco de dados
 public class User implements Serializable {
 	/**
 		No java existe uma interface chamada Serializable que
@@ -37,7 +37,7 @@ public class User implements Serializable {
 	*/
 	
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;	// Serial para transformar as informações em requisições HTTP
 	
 	@Id					// Essa anotação diz ao Spring que a variável "id" é o identificador da entidade dentro do banco de dados.
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	// Essa anotação serve para gerar o ID do objeto de forma auto-incremental.

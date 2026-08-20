@@ -4,19 +4,20 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.educandoweb.course.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
-@Entity
+@Entity								
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private OrderItemPK id;	// Esse ID é composto
+	private OrderItemPK id = new OrderItemPK();	// Esse ID é composto
 	
 	private Integer quantity;
 	private Double price;
@@ -65,6 +66,11 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 	
+	/*
+		Nós adicionamos a anotação JsonIgnore aqui, pois a página web chama os atributos
+		via esse método.
+	*/
+	@JsonIgnore	
 	public Order getOrder() {
 		return id.getOrder();
 	}
