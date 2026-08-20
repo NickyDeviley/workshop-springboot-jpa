@@ -68,7 +68,7 @@ public class OrderItem implements Serializable {
 	
 	/*
 		Nós adicionamos a anotação JsonIgnore aqui, pois a página web chama os atributos
-		via esse método.
+		via esse método. E um pedido tem vários produtos que participa de vários pedidos.
 	*/
 	@JsonIgnore	
 	public Order getOrder() {

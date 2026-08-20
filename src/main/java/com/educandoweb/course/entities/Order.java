@@ -26,21 +26,21 @@ public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
-	@Id					// Essa anotação diz ao Spring que a variável "id" é o identificador da entidade dentro do banco de dados.
+	@Id													// Essa anotação diz ao Spring que a variável "id" é o identificador da entidade dentro do banco de dados.
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	// Essa anotação serve para gerar o ID do objeto de forma auto-incremental.
 	private Long id;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-	private Instant moment;				//  Antes da versão 8 do java usava-se o Date, mas o Instant é mais preciso.
+	private Instant moment;								//  Antes da versão 8 do java usava-se o Date, mas o Instant é mais preciso.
 	
 	private Integer orderStatus;
 	
-	@ManyToOne							// Essa anotação do JPA diz que um cliente pode ter vários pedidos, mas que o pedido só pode ter 1 cliente
-	@JoinColumn(name = "client_id")		// Essa anotação do JPA diz serve para acessar os pedidos e unir a tebela clients pois cada pedido depende de um cliente 
-	private User client;				// Chave estrangeira
+	@ManyToOne											// Essa anotação do JPA diz que um cliente pode ter vários pedidos, mas que o pedido só pode ter 1 cliente
+	@JoinColumn(name = "client_id")						// Essa anotação do JPA diz serve para acessar os pedidos e unir a tebela clients pois cada pedido depende de um cliente 
+	private User client;								// Chave estrangeira
 	
 	
-	@OneToMany(mappedBy = "id.order")
+	@OneToMany(mappedBy = "id.order")					// Utilizamos "id.order" pois os product estão dentro do atributo ID no objeto "OrderItem"
 	private Set<OrderItem> items = new HashSet<>();
 	
 	// Construtores
