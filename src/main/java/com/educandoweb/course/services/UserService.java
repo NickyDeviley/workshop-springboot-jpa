@@ -45,4 +45,23 @@ public class UserService {
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
+	
+	public User update(Long id, User obj) {
+		/*
+			Estou pegando um objeto monitorado, ou seja, o método "getReferenceById"
+			retorna um objeto do banco de dados que é monitorado pelo JPA, assim podemos
+			alterá-lo a vontade e só depois retorná-lo para o banco de dados.
+		*/
+		User entity = repository.getReferenceById(id);
+		updateData(entity, obj);
+		return repository.save(entity);
+		
+	}
+	
+	private void updateData(User entity, User obj) {
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
+	}
+	
 }
