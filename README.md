@@ -2,7 +2,7 @@
 
 # Descrição:
 
-O "porquê" e o "que" do projeto: Esta aplicação foi desenvolvida com propósito estritamente acadêmico para consolidar o aprendizado em ecossistema Spring (Spring Boot, JPA, Hibernate) e criação de APIs RESTful. O projeto resolve o desafio de estruturar uma aplicação web completa aplicando boas práticas de arquitetura, separação clara de responsabilidades em camadas e mapeamento objeto-relacional (ORM). A arquitetura é dividida profissionalmente nas camadas:
+Esta aplicação foi desenvolvida com propósito estritamente acadêmico para consolidar o aprendizado em ecossistema Spring (Spring Boot, JPA, Hibernate) e criação de APIs RESTful. O projeto resolve o desafio de estruturar uma aplicação web completa aplicando boas práticas de arquitetura, separação clara de responsabilidades em camadas e mapeamento objeto-relacional (ORM). A arquitetura é dividida profissionalmente nas camadas:
 
     Resource (Controllers): Camada de disponibilização dos endpoints REST.
 
@@ -25,7 +25,7 @@ Além disso, a aplicação implementa CRUDs completos para gerenciar um domínio
     Clone este repositório em sua máquina local:
     Bash
 
-    git clone https://github.com/seu-usuario/nome-do-repositorio.git
+    git clone https://github.com/NickyDeviley/workshop-springboot-jpa
 
     Abra o Eclipse (Spring Tool Suite).
 
