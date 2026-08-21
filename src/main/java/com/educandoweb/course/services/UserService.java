@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
+import com.educandoweb.course.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -33,7 +34,14 @@ public class UserService {
 	
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		
+		/*
+		  	Antes nós usávamos o método GET que stopava a aplicação caso o objeto não fosse encontrado
+		  	agora esse novo método "orElseThrow" tenta pegar o objeto, porém se ele não encontra ele
+		  	ativa a exceção personalizada. Nesse caso nós utilizamos uma expressão lambda para instanciar
+		  	a classe de forma diminuta e enviar um parâmetro para seu método.
+		*/
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));	
 	}
 	
 	public User insert(User obj) {
